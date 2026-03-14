@@ -1,4 +1,3 @@
-```markdown
 # 購物網站練習
 
 本專案為一個使用 **Vue + Express + SQLite** 開發的簡易全端購物網站。

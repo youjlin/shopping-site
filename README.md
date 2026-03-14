@@ -266,7 +266,7 @@ Authorization: Bearer <token>
 
 # 說明
 
-本專案為教學用途的簡易電商系統範例，主要練習：
+練習：
 
 * REST API 設計
 * JWT 身分驗證

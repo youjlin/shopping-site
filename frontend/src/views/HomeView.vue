@@ -1,0 +1,104 @@
+<script setup>
+import { ref, onMounted } from "vue"
+
+const products = ref([])
+const selectedProduct = ref(null)
+
+const loadProducts = async () => {
+      try {
+            const res = await fetch("http://localhost:3000/products")
+            const data = await res.json()
+            products.value = data.products
+      } catch (err) {
+            console.error("fetch error:", err)
+      }
+}
+
+const loadProductDetail = async (productId) => {
+      try {
+            const res = await fetch(`http://localhost:3000/products/${productId}`)
+            const data = await res.json()
+            selectedProduct.value = data.product
+      } catch (err) {
+            console.error("product detail error:", err)
+      }
+}
+
+const addToCart = async (productId) => {
+      const token = localStorage.getItem("token")
+
+      if (!token) {
+            alert("請先登入")
+            return
+      }
+
+      try {
+            const res = await fetch("http://localhost:3000/cart/items", {
+                  method: "POST",
+                  headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                  },
+                  body: JSON.stringify({
+                        productId,
+                        quantity: 1
+                  })
+            })
+
+            const data = await res.json()
+            console.log("addToCart result:", data)
+            alert(data.message || "已加入購物車")
+      } catch (err) {
+            console.error("addToCart error:", err)
+      }
+}
+
+onMounted(() => {
+  loadProducts()
+})
+</script>
+
+<template>
+      <div>
+            <h1>商品列表</h1>
+
+            <div class="product-list">
+                  <div v-for="p in products" :key="p.id" class="card">
+                        <h3>{{ p.name }}</h3>
+                        <p>{{ p.description }}</p>
+                        <p>價格：{{ p.price }}</p>
+                        <p>庫存：{{ p.stock }}</p>
+                        <button @click="loadProductDetail(p.id)">查看詳情</button>
+                        <button @click="addToCart(p.id)">加入購物車</button>
+                  </div>
+            </div>
+
+            <div v-if="selectedProduct" class="card detail-card">
+                  <h2>商品詳情</h2>
+                  <h3>{{ selectedProduct.name }}</h3>
+                  <p>{{ selectedProduct.description }}</p>
+                  <p>價格：{{ selectedProduct.price }}</p>
+                  <p>庫存：{{ selectedProduct.stock }}</p>
+                  <img :src="selectedProduct.image_url" alt="" style="max-width: 200px;" />
+            </div>
+      </div>
+</template>
+
+<style scoped>
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  background: white;
+}
+
+.detail-card {
+  margin-top: 24px;
+}
+</style>

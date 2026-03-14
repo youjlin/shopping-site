@@ -46,7 +46,7 @@ shopping-site
 ## 下載專案
 
 ```bash
-git clone <你的-github-repo>
+git clone https://github.com/youjlin/shopping-site.git
 cd shopping-site
 ````
 
@@ -262,13 +262,3 @@ Authorization: Bearer <token>
 7. 查看歷史訂單
 8. 查看訂單詳細資訊
 
----
-
-# 說明
-
-練習：
-
-* REST API 設計
-* JWT 身分驗證
-* 前後端分離架構
-* 資料庫設計

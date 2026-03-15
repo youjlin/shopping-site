@@ -80,22 +80,44 @@ const register = async () => {
 
 .login-box {
   width: 100%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 24px;
+  max-width: 420px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 28px;
   background: white;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.login-box h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .login-box input {
   width: 100%;
-  margin-bottom: 12px;
-  padding: 10px;
+  margin-bottom: 14px;
+  padding: 12px;
   box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
 }
 
 .actions {
   display: flex;
   gap: 12px;
+}
+
+.actions button {
+  flex: 1;
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background: #1d4ed8;
 }
 </style>

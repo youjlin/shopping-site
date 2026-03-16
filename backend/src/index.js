@@ -9,10 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 建立或開啟 SQLite 檔案
 const db = new Database("dev.db");
 
-// 建立 users 資料表（如果不存在）
 db.exec(`
 CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,

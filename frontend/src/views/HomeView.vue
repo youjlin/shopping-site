@@ -28,7 +28,7 @@ const addToCart = async (productId) => {
       const token = localStorage.getItem("token")
 
       if (!token) {
-            alert("請先登入")
+            alert("Please log in first.")
             return
       }
 
@@ -47,7 +47,7 @@ const addToCart = async (productId) => {
 
             const data = await res.json()
             console.log("addToCart result:", data)
-            alert(data.message || "已加入購物車")
+            alert(data.message || "Added to cart.")
       } catch (err) {
             console.error("addToCart error:", err)
       }
@@ -60,26 +60,26 @@ onMounted(() => {
 
 <template>
       <div>
-            <h1>商品列表</h1>
+            <h1>Product List</h1>
 
             <div class="product-list">
                   <div v-for="p in products" :key="p.id" class="card">
                         <img :src="p.image_url" alt="" class="product-image" />
                         <h3>{{ p.name }}</h3>
                         <p>{{ p.description }}</p>
-                        <p>價格：{{ p.price }}</p>
-                        <p>庫存：{{ p.stock }}</p>
-                        <button @click="loadProductDetail(p.id)">查看詳情</button>
-                        <button @click="addToCart(p.id)">加入購物車</button>
+                        <p>Price：{{ p.price }}</p>
+                        <p>Stock：{{ p.stock }}</p>
+                        <button @click="loadProductDetail(p.id)">View Details</button>
+                        <button @click="addToCart(p.id)">Add to Cart</button>
                   </div>
             </div>
 
             <div v-if="selectedProduct" class="card detail-card">
-                  <h2>商品詳情</h2>
+                  <h2>Product Details</h2>
                   <h3>{{ selectedProduct.name }}</h3>
                   <p>{{ selectedProduct.description }}</p>
-                  <p>價格：{{ selectedProduct.price }}</p>
-                  <p>庫存：{{ selectedProduct.stock }}</p>
+                  <p>Price：{{ selectedProduct.price }}</p>
+                  <p>Stock：{{ selectedProduct.stock }}</p>
                   <img :src="selectedProduct.image_url" alt="" style="max-width: 200px;" />
             </div>
       </div>

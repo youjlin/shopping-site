@@ -24,11 +24,11 @@ const logout = () => {
       </div>
 
       <nav class="nav-links">
-        <router-link to="/">商品</router-link>
-        <router-link to="/cart">購物車</router-link>
-        <router-link to="/orders">訂單</router-link>
-        <router-link v-if="!isLoggedIn" to="/login">登入</router-link>
-        <button v-if="isLoggedIn" class="logout-btn" @click="logout">登出</button>
+        <router-link to="/">Products</router-link>
+        <router-link to="/cart">Cart</router-link>
+        <router-link to="/orders">Orders</router-link>
+        <router-link v-if="!isLoggedIn" to="/login">Login</router-link>
+        <button v-if="isLoggedIn" class="logout-btn" @click="logout">Logout</button>
       </nav>
     </header>
 

@@ -32,7 +32,7 @@ const updateQuantity = async (cartItemId, newQuantity) => {
       const token = localStorage.getItem("token")
 
       if (!token) {
-            alert("請先登入")
+            alert("Please log in first.")
             return
       }
 
@@ -83,7 +83,7 @@ const checkout = async () => {
       const token = localStorage.getItem("token")
 
       if (!token) {
-            alert("請先登入")
+            alert("Please log in first.")
             return
       }
 
@@ -98,10 +98,10 @@ const checkout = async () => {
             const data = await res.json()
 
             if (res.ok) {
-                  alert("訂單建立成功")
+                  alert("Order created successfully.")
                   await loadCart()
             } else {
-                  alert(data.message || "結帳失敗")
+                  alert(data.message || "Checkout failed.")
             }
       } catch (err) {
             console.error("checkout error:", err)
@@ -115,28 +115,28 @@ onMounted(() => {
 
 <template>
       <div>
-            <h1>購物車</h1>
+            <h1>Cart</h1>
 
             <div v-if="cartItems.length === 0">
-                  購物車是空的
+                  Your cart is empty.
             </div>
 
             <div v-else>
                   <div v-for="item in cartItems" :key="item.cartItemId" class="card">
                         <h3>{{ item.name }}</h3>
-                        <p>單價：{{ item.price }}</p>
+                        <p>Unit Price: {{ item.price }}</p>
                         <p>
-                              數量：
+                              Quantity:
                               <button @click="updateQuantity(item.cartItemId, item.quantity - 1)">-</button>
                               {{ item.quantity }}
                               <button @click="updateQuantity(item.cartItemId, item.quantity + 1)">+</button>
-                              <button @click="removeCartItem(item.cartItemId)">刪除</button>
+                              <button @click="removeCartItem(item.cartItemId)">Remove</button>
                         </p>
-                        <p>小計：{{ item.subtotal }}</p>
+                        <p>Subtotal: {{ item.subtotal }}</p>
                   </div>
 
-                  <h3>總價：{{ cartTotal }}</h3>
-                  <button @click="checkout">結帳</button>
+                  <h3>Total: {{ cartTotal }}</h3>
+                  <button @click="checkout">Checkout</button>
             </div>
       </div>
 </template>

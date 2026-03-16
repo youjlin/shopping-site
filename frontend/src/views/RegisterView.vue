@@ -11,7 +11,7 @@ const confirmPassword = ref("")
 const register = async () => {
 
   if (password.value !== confirmPassword.value) {
-    alert("兩次輸入的密碼不一致")
+    alert("Passwords do not match")
     return
   }
 
@@ -27,100 +27,133 @@ const register = async () => {
       })
     })
 
-    const data = await res.json()
-
     if (res.ok) {
-      alert("註冊成功，請登入")
+      alert("Registration successful, please log in")
       router.push("/login")
     } else {
-      alert(data.message || "註冊失敗")
+      alert("Registration failed")
     }
 
   } catch (err) {
-    console.error("register error:", err)
+    console.error(err)
   }
 }
 </script>
 
 <template>
-  <div class="auth-page">
-    <div class="auth-card">
-      <h1>註冊</h1>
-      <p class="subtitle">建立你的新帳號</p>
+  <div class="register-page">
 
-      <input v-model="email" type="email" placeholder="Email" />
+    <div class="register-card">
 
-      <input
-        v-model="password"
-        type="password"
-        placeholder="密碼"
-      />
+      <div class="left">
+        <h1>Sign Up</h1>
+        <p>Create an account to start shopping.</p>
+      </div>
 
-      <input
-        v-model="confirmPassword"
-        type="password"
-        placeholder="確認密碼"
-      />
+      <div class="right">
 
-      <button class="primary-btn" @click="register">
-        註冊
-      </button>
+        <div class="input-group">
+          <label>Email</label>
+          <input v-model="email" type="email">
+        </div>
 
-      <p class="switch-text">
-        已經有帳號？
-        <router-link to="/login">前往登入</router-link>
-      </p>
+        <div class="input-group">
+          <label>Password</label>
+          <input v-model="password" type="password">
+        </div>
+
+        <div class="input-group">
+          <label>Confirm Password</label>
+          <input v-model="confirmPassword" type="password">
+        </div>
+
+        <button class="btn" @click="register">
+          Register
+        </button>
+
+        <p class="bottom-text">
+          Already have account?
+          <router-link to="/login">Login</router-link>
+        </p>
+
+      </div>
+
     </div>
+
   </div>
 </template>
 
 <style scoped>
-.auth-page {
-  min-height: calc(100vh - 120px);
+
+.register-page {
+  min-height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #f8fafc;
 }
 
-.auth-card {
-  width: 100%;
-  max-width: 420px;
+.register-card {
+  width: 900px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   background: white;
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
 }
 
-.subtitle {
-  color: #6b7280;
+.left {
+  padding: 50px;
+  background: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left h1 {
+  margin-bottom: 10px;
+}
+
+.right {
+  padding: 50px;
+}
+
+.input-group {
   margin-bottom: 20px;
 }
 
-.auth-card input {
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  box-sizing: border-box;
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
-.primary-btn {
+.input-group input {
   width: 100%;
-  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
   background: #2563eb;
   color: white;
-  padding: 12px;
-  border-radius: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.primary-btn:hover {
+.btn:hover {
   background: #1d4ed8;
 }
 
-.switch-text {
+.bottom-text {
   margin-top: 16px;
   text-align: center;
 }
+
 </style>

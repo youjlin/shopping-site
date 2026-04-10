@@ -211,6 +211,13 @@ Authorization: Bearer <token>
 ---
 
 # 系統功能
+## 管理者
+* 帳號: admin@gmail.com
+* 密碼: 123456
+* 新增/刪除分類
+* 新增/刪除/修改商品
+
+---
 
 ## 使用者功能
 
